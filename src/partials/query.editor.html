@@ -1,0 +1,15 @@
+<query-editor-row query-ctrl="ctrl">
+  
+    <div class="gf-form-inline">
+        <div class="gf-form">
+            <label class="gf-form-label width-8">Application</label>
+            <select 
+            ng-model="ctrl.target.app" class="gf-form-input width-15"
+            ng-options="app as app.name for app in ctrl.applications track by app.id"
+            ng-change="ctrl.toggleApplication()">
+            <!-- ng-change="ctrl.toggleApplication()"> -->
+          </select>
+        </div>
+    </div>
+    
+</query-editor-row>
