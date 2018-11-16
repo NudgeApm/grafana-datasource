@@ -9,6 +9,15 @@
             ng-change="ctrl.toggleApplication()">
             <!-- ng-change="ctrl.toggleApplication()"> -->
           </select>
+
+           <!-- MetricValue -->
+        <select
+            ng-model="ctrl.target.metrics"
+            ng-options="metric.value as metric.label for metric in ctrl.metrics"
+            on-change="ctrl.toggleMetric()"
+            class="width-15"
+            placeholder="Metric Value">
+        </select>
         </div>
     </div>
     

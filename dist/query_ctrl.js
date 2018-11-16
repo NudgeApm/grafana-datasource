@@ -27,10 +27,15 @@ System.register(['lodash', 'app/plugins/sdk', './css/query_editor.css!'], functi
                         target: 'application',
                         type: 'timeserie'
                     };
+                    this.metrics = [
+                        { value: 'gen_overview', label: 'App global response time' },
+                        { value: 'gen_count', label: 'App global count' }
+                    ];
                     lodash_1.default.defaultsDeep(this.target, defaults);
                     this.target.target = defaults.target;
                     this.target.type = defaults.type;
                     this.getApplications();
+                    this.toggleMetric();
                 }
                 NudgeQueryCtrl.prototype.getApplications = function () {
                     var _this = this;
@@ -47,6 +52,22 @@ System.register(['lodash', 'app/plugins/sdk', './css/query_editor.css!'], functi
                 };
                 NudgeQueryCtrl.prototype.getOptions = function (query) {
                     return this.datasource.metricFindQuery(query || '');
+                };
+                // Gets list of metric namespaces from datasource to populate the Metric Value dropdown
+                NudgeQueryCtrl.prototype.getMetricValues = function () {
+                    var values = ["General", "Count"];
+                    return values;
+                };
+                // Shows the second operand selection if the operator is defined
+                NudgeQueryCtrl.prototype.toggleMetric = function () {
+                    console.log("echo from toggleOperand2 query_ctrl");
+                    if (this.target.app != "") {
+                        this.isMetricVisible = true;
+                    }
+                    else {
+                        this.isMetricVisible = false;
+                        this.refresh();
+                    }
                 };
                 NudgeQueryCtrl.prototype.onChangeInternal = function () {
                     this.panelCtrl.refresh(); // Asks the panel to refresh data.

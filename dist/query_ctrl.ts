@@ -15,6 +15,8 @@ export class NudgeQueryCtrl extends QueryCtrl {
   type: any;
   applications: any[];
   app: any; // TODO use application type
+  isMetricVisible: boolean;
+  metrics: any;
 
   /** @ngInject **/
   constructor($scope, $injector) {
@@ -26,11 +28,17 @@ export class NudgeQueryCtrl extends QueryCtrl {
       type: 'timeserie'
     };
 
+    this.metrics = [ 
+      { value: 'gen_overview', label: 'App global response time'},
+      { value: 'gen_count', label: 'App global count'}
+    ];
+
     _.defaultsDeep(this.target, defaults);
 
     this.target.target = defaults.target;
     this.target.type = defaults.type;
     this.getApplications();
+    this.toggleMetric();
   }
 
   getApplications() {
@@ -48,6 +56,24 @@ export class NudgeQueryCtrl extends QueryCtrl {
 
   getOptions(query) {
     return this.datasource.metricFindQuery(query || '');
+  }
+
+  // Gets list of metric namespaces from datasource to populate the Metric Value dropdown
+  getMetricValues() {
+    let values: string[] = ["General", "Count"];
+    return values;
+  }
+
+  // Shows the second operand selection if the operator is defined
+  toggleMetric() {
+    console.log("echo from toggleOperand2 query_ctrl");
+    if (this.target.app != "") {
+      this.isMetricVisible = true;
+    } else {
+      this.isMetricVisible = false;
+      this.refresh();
+      //return [];
+    }
   }
 
   onChangeInternal() {
