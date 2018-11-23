@@ -115,6 +115,7 @@ export default class NudgeDatasource {
 
   // TODO use type UUID https://www.npmjs.com/package/@types/uuid
   metricFindQuery(appId) {
+    console.log("toggle metricFindQuery from datasource");
     return [];
   }
 

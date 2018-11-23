@@ -14,7 +14,7 @@
         <select
             ng-model="ctrl.target.metrics"
             ng-options="metric.value as metric.label for metric in ctrl.metrics"
-            on-change="ctrl.toggleMetric()"
+            ng-change="ctrl.toggleMetric()"
             class="width-15"
             placeholder="Metric Value">
         </select>

@@ -47,7 +47,7 @@ export class NudgeQueryCtrl extends QueryCtrl {
         apps = _.map(apps, app => {
           return { name: app.name, id: app.id};
         });
-        // fix applications to model
+        // set applications to model
         this.applications = apps;
         return apps;
       }
@@ -67,20 +67,28 @@ export class NudgeQueryCtrl extends QueryCtrl {
   // Shows the second operand selection if the operator is defined
   toggleMetric() {
     console.log("echo from toggleOperand2 query_ctrl");
+    console.log("value of " + this.metrics.value);
+    console.log("label  " + this.metrics.value);
     if (this.target.app != "") {
       this.isMetricVisible = true;
     } else {
       this.isMetricVisible = false;
       this.refresh();
+      console.log("refreeeesh");
+      
       //return [];
     }
+    this.refresh();
   }
 
   onChangeInternal() {
+    console.log("onChangeInternal refreeeesh");
     this.panelCtrl.refresh(); // Asks the panel to refresh data.
   }
 
-  toggleApplication(query: any) {
-    return this.datasource.metricFindQuery(this.target.app.id);
+  toggleApplication() {
+    console.log("apps: " + this.applications);
+    this.refresh();
+    this.datasource.metricFindQuery(this.target.app.id);
   }
 }
